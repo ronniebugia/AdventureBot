@@ -1,10 +1,8 @@
-# Getting Started with Create React App
+# AdventureBot (WIP)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Your AI-Powered Vacation Planner. Discover, Plan, and Experience Your Dream Getaway with Intelligent Assistance.
 
-## Available Scripts
-
-In the project directory, you can run:
+## React scripts
 
 ### `yarn start`
 
@@ -68,3 +66,12 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `yarn build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+# Credits
+Authored by Ronnie Bugia
+
+[Github] https://github.com/ronniebugia
+
+[LinkedIn] https://www.linkedin.com/in/ronnie-bugia/
+
+[Website] https://ronniebugia.netlify.app/
