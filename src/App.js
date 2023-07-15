@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import './App.css';
 import './css/MainController.css';
-
+import './css/Itinerary.css';
 
 // Pages 
 import MainController from './pages/MainController';

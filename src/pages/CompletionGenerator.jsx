@@ -2,17 +2,12 @@ import React, { useEffect, useState } from 'react';
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import ReactMarkdown from "react-markdown";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Spinner from 'react-bootstrap/Spinner';
 
 import { getDailyItinerary, generateAccomodationsSummary, getTransportationSummary } from '../api/generate';
 
-const CompletionGenerator = () => {
-	const [response, setResponse] = useState('');
-	const [accomodationsResponse, setAccomodationsResponse] = useState('');
-	const [transporationResponse, setTransporationResponse] = useState('');
+const CompletionGenerator = ({setResponse, setAccomodationsResponse, setTransporationResponse}) => {
 
 	const [startDate, setStartDate] = useState('');
 	const [endDate, setEndDate] = useState('');
@@ -22,14 +17,15 @@ const CompletionGenerator = () => {
 	const LOADING_MSG = "Loading...";
 	const ERROR_MSG = "Error: There was a problem generating your travel plans. Please try again.";
 
-	var initialStartDate = new Date();
-	initialStartDate.setDate(initialStartDate.getDate() + 1);
-	var initialEndDate = new Date(initialStartDate);
-	initialEndDate.setDate(initialStartDate.getDate() + 3);
-
 	useEffect(() => {
 
 		if (startDate === '' || endDate === '') {
+
+			var initialStartDate = new Date();
+			initialStartDate.setDate(initialStartDate.getDate() + 1);
+			var initialEndDate = new Date(initialStartDate);
+			initialEndDate.setDate(initialStartDate.getDate() + 3);
+
 			setStartDate(initialStartDate.toISOString().slice(0, 10));
 			setEndDate(initialEndDate.toISOString().slice(0, 10));
 		}
@@ -59,17 +55,6 @@ const CompletionGenerator = () => {
 		setAccomodationsResponse(accomodationsSummary ? accomodationsSummary : ERROR_MSG);
 		setTransporationResponse(transportationSummary ? transportationSummary : ERROR_MSG);
 	};
-
-	const loadingSpinner = () => {
-		return (
-			<div className="div-spinner">
-			<Spinner animation="border" role="status">
-				<span className="visually-hidden">Loading...</span>
-			</Spinner>
-		</div>
-		);
-	};
-
 
 	return (
 		<div className="prompt-card">
@@ -103,7 +88,7 @@ const CompletionGenerator = () => {
 						<p>Include anything you would like us to factor in on your trip.</p>
 						<Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
 							<Form.Control
-								as="textarea" rows={5} value={additionalNotes} placeholder="Ex. I want to see live music. I would like to do a lot of hiking. I am vegan so please only suggest vegan options. Etc." onChange={e => setAdditionalNotes(e.target.value)}
+								as="textarea" rows={2} value={additionalNotes} placeholder="Ex. I want to see live music. I would like to do a lot of hiking. I am vegan so please only suggest vegan options. Etc." onChange={e => setAdditionalNotes(e.target.value)}
 							/>
 						</Form.Group>
 					</Row>
@@ -111,32 +96,6 @@ const CompletionGenerator = () => {
 
 				<div className="d-grid gap-2">
 					<Button variant="primary" size="lg" onClick={completePrompt}>Plan your trip</Button>
-				</div>
-
-				<div>
-					<div>
-						{response && 
-						<div>
-							<h2>Daily Itinerary</h2>
-							<ReactMarkdown>
-								{response}
-							</ReactMarkdown>
-						</div>}
-						{transporationResponse && 
-						<div>
-							<h2>Transporation</h2>
-							<ReactMarkdown>
-								{transporationResponse}
-							</ReactMarkdown>
-						</div>}
-						{accomodationsResponse && 
-						<div>
-							<h2>Accomodations</h2>
-							<ReactMarkdown>
-								{accomodationsResponse}
-							</ReactMarkdown>
-						</div>}
-					</div>
 				</div>
 			</div>
 		</div>
